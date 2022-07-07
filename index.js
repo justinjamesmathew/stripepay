@@ -8,6 +8,12 @@ const stripe = require('stripe')('sk_test_51KAyelC2UJW67kLCMMc7EQwlkhh5bLMTXXkev
 app.get('/', (req,res)=> {
     res.sendFile('/checkout.html',{root: __dirname });
 });
+app.get('/cancel.html', (req,res)=> {
+    res.sendFile('/cancel.html',{root:__dirname});
+});
+app.get('/success.html',(req,res)=>{
+    res.sendFile('/success.html',{root:__dirname});
+})
 app.post('/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: [
@@ -23,8 +29,8 @@ app.post('/create-checkout-session', async (req, res) => {
       },
     ],
     mode: 'payment',
-    success_url: 'https://example.com/success',
-    cancel_url: 'https://example.com/cancel',
+    success_url: 'http://localhost:4242/success.html',
+    cancel_url: 'http://localhost:4242/cancel.html',
   });
 
   res.redirect(303, session.url);
