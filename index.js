@@ -19,7 +19,7 @@ app.post('/create-checkout-session', async (req, res) => {
     line_items: [
       {
         price_data: {
-          currency: 'usd',
+          currency: 'eur',
           product_data: {
             name: 'T-shirt',
           },
